@@ -1,22 +1,15 @@
+import hash from 'hash-string';
+import classes from 'dom-classes';
 import * as State from './state';
+
 import {prop} from './util';
 import {addSentence, removeSentence} from './actions';
-import {randomItem} from './query';
-import hash from 'hash-string';
+import {randomSentence} from './query';
 
-let main = document.getElementById('main');
-main.innerHTML = JSON.stringify(State.current(), null, '  ');
+let homePage     = document.getElementById('home');
+let sentencePage = document.getElementById('sentence-page');
 
-State.listen(prop('sentences'), s =>
-  main.innerHTML = JSON.stringify(s, null, '  '));
+let getHappy     = document.getElementById('get-happy');
+let sentence     = document.getElementById('sentence');
 
-State.listen(prop('sentences'), s =>
-  console.log(s));
-
-setTimeout(function() {
-  State.update(addSentence(hash)('oi!'))
-}, 1000);
-
-window.State = State;
-window.addSentence = addSentence;
-window.hashFn = hash;
+getHappy.onclick = () => sentence.innerHTML = randomSentence(State.current()).text;

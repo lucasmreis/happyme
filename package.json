@@ -4,7 +4,7 @@
   "description": "Let your happy self cheer up your sad self!",
   "main": "src/index.js",
   "scripts": {
-    "start": "babel-node src/scripts/index",
+    "start": "cd dist && httpserver",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cp src/index.html dist/ && browserify src/scripts/index.js -t babelify --outfile dist/app.js",
     "lint": "eslint src/*.js",
@@ -25,13 +25,13 @@
     "babel-eslint": "^4.0.5",
     "babelify": "^6.1.3",
     "browserify": "^11.0.1",
-    "eslint": "^1.0.0"
+    "eslint": "^1.0.0",
+    "httpserver": "^0.2.0"
   },
   "dependencies": {
     "bm-random": "^1.0.0",
-    "clone": "^1.0.2",
     "deep-equal": "^1.0.0",
-    "domquery": "^1.2.0",
+    "dom-classes": "0.0.1",
     "hash-string": "^1.0.0"
   }
 }

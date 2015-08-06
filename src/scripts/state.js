@@ -1,7 +1,7 @@
 import equals from 'deep-equal';
 
 let state = {
-  page: 'index', // 'sentence', 'add'
+  page: 'aaa', // 'sentence', 'add'
   sentences: [
     {id: 123, text: "Lembra da Pretinha!"},
     {id: 456, text: "Lembra do Cotinho!"}
