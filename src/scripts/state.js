@@ -1,7 +1,7 @@
 import equals from 'deep-equal';
 
 let state = {
-  page: 'aaa', // 'sentence', 'add'
+  page: 'loading-page',
   sentences: [
     {id: 123, text: "Lembra da Pretinha!"},
     {id: 456, text: "Lembra do Cotinho!"}
@@ -24,7 +24,7 @@ const callListener = (currentState, newState) => listener => {
   const previousListenTo = listener.listenTo(currentState);
   const newListenTo      = listener.listenTo(newState);
   if (!equals(previousListenTo, newListenTo)) {
-    listener.cb(newListenTo);
+    listener.cb(newListenTo, previousListenTo);
   }
 };
 
