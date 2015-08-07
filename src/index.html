@@ -2,21 +2,43 @@
 <html>
   <head>
     <title>Happy Me!</title>
+
+    <!-- Styles -->
+    <link href="reset.css" rel="stylesheet" type="text/css">
+    <link href="style.css" rel="stylesheet" type="text/css">
+
+    <!-- Font -->
+    <link href='http://fonts.googleapis.com/css?family=Sorts+Mill+Goudy:400,400italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   </head>
   <body>
 
-  <div id="home" class="page">
-    <button id="get-happy">Get Happy</button>
-    <button id="new-sentence">Write New Inspiration</button>
-  </div>
+  <div class="container">
+    <div id="loading-page" class="page inside">
+      <h1>Happy Me</h1>
+      <h2>Loading...</h2>
+    </div>
 
-  <div id="sentence-page" class="page">
-    <p id="sentence">Remember Pretinha!</p>
+    <div id="home" class="page">
+      <button id="get-happy">Get Happy</button>
+      <button id="new-sentence">Write New Inspiration</button>
+    </div>
 
-    <button id="back-home">Home</button>
-    <button id="next-sentence">Next</button>
+    <div id="sentence-page" class="page">
+      <p id="sentence">Remember Pretinha!</p>
+
+      <button id="back-home">Home</button>
+      <button id="next-sentence">Next</button>
+    </div>
+
+    <div id="write-page" class="page">
+      <input type="text"></input>
+
+      <button id="add-sentence">Add</button>
+    </div>
   </div>
 
   <script src="app.js"></script>
+
   </body>
 </html>

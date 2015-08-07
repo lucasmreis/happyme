@@ -6,7 +6,10 @@
   "scripts": {
     "start": "cd dist && httpserver",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cp src/index.html dist/ && browserify src/scripts/index.js -t babelify --outfile dist/app.js",
+    "build": "npm run js && npm run css && npm run html",
+    "js": "browserify src/scripts/index.js -t babelify --outfile dist/app.js",
+    "html": "cp src/index.html dist/",
+    "css": "node-sass src/styles/reset.scss dist/reset.css && node-sass src/styles/style.scss dist/style.css",
     "lint": "eslint src/*.js",
     "c": "babel-node"
   },

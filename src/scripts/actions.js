@@ -1,5 +1,8 @@
 import {addItem, assoc} from './util';
 
+export const goTo = page => state =>
+  assoc('page', page, state);
+
 export const addSentence = idGenerator => text => state => {
   const id           = idGenerator(text);
   const sentence     = {id: id, text: text};
