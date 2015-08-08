@@ -1,9 +1,21 @@
 $serif-font: 'Sorts Mill Goudy', serif;
 $sans-serif-font: sans-serif;
 
+$happy-color: #492E74;
+$happy-color-light: lighten($happy-color, 30%);
+
+@mixin happy-btn() {
+  font-family: $sans-serif-font;
+  font-size: 2em;
+  background-color: $happy-color-light;
+  color: $happy-color;
+}
+
 body {
   font-family: $serif-font;
   overflow-x: hidden;
+  background-color: $happy-color;
+  color: $happy-color-light;
 }
 
 .container {
@@ -15,7 +27,6 @@ body {
   position: absolute;
   z-index: 0;
   width: 100%;
-  padding: 20px;
   margin-left: 110%;
   opacity: 0;
   -webkit-transition: opacity .3s, margin-left .7s;
@@ -32,4 +43,15 @@ body {
   -moz-transition:    opacity .3s, margin-left .7s;
   -o-transition:      opacity .3s, margin-left .7s;
   transition:         opacity .3s, margin-left .7s;
+}
+
+.btn {
+  @include happy-btn();
+  width: 80%;
+  line-height: 4em;
+  display: block;
+  margin: 60px auto;
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
 }
