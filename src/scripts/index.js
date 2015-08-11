@@ -1,13 +1,14 @@
 import hash from 'hash-string';
 import classes from 'dom-classes';
 
-import * as State from './state';
-import * as HomeController from './home-controller';
-import * as SentencePageController from './sentence-page-controller';
+import * as State from './state/state';
+import * as HomeController from './controllers/home-controller';
+import * as SentencePageController from './controllers/sentence-page-controller';
+
+import {genRandomSentences} from './state/fill-random';
 
 import {prop} from './util';
-import {goTo, addSentence, removeSentence} from './actions';
-import {randomSentence} from './query';
+import {goTo, addSentence, removeSentence} from './state/actions';
 
 const pages = {
   'loading-page':  document.getElementById('loading-page'),
@@ -21,7 +22,16 @@ let newSentence  = document.getElementById('new-sentence');
 HomeController.start(getHappy, newSentence);
 
 let homeSentence = document.getElementById('back-home');
-SentencePageController.start(homeSentence);
+let nextSentence = document.getElementById('next-sentence');
+let sentenceText = document.getElementById('sentence');
+SentencePageController.start(homeSentence, nextSentence, sentenceText);
+
+// generate random sentences
+const initialSentences = State.current().sentences;
+State.update(genRandomSentences(initialSentences));
+State.listen(prop('sentences'), (n, p) => {
+  State.update(genRandomSentences(n));
+});
 
 // routing
 State.listen(prop('page'), (n, p) => {
@@ -43,3 +53,5 @@ setTimeout(function() {
 }, 500);
 
 State.listen(x => x, x => console.log('STATE', JSON.stringify(x, null, '  ')));
+
+

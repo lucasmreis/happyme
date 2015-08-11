@@ -5,7 +5,9 @@ let state = {
   sentences: [
     {id: 123, text: "Lembra da Pretinha!"},
     {id: 456, text: "Lembra do Cotinho!"}
-  ]
+  ],
+  currentSentence: 0,
+  randomSentences: []
 };
 
 let listeners = [];

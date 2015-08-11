@@ -7,6 +7,9 @@ export const addItem = (i, array) => {
 };
 
 export const assoc = (prop, v, obj) => {
+  if (!obj) {
+    return o => assoc(prop, v, o);
+  }
   let c = clone(obj);
   c[prop] = v;
   return c;

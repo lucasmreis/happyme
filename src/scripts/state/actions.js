@@ -1,4 +1,5 @@
-import {addItem, assoc} from './util';
+import {nextIndex} from './query';
+import {addItem, assoc} from '../util';
 
 export const goTo = page => state =>
   assoc('page', page, state);
@@ -17,3 +18,6 @@ export const removeSentence = id => state => {
   const newState     = assoc('sentences', newSentences, state);
   return newState;
 };
+
+export const nextSentenceIndex = state =>
+  assoc('currentSentence', nextIndex(state.sentences, state.currentSentence), state);

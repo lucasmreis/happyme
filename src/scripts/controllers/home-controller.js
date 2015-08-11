@@ -1,6 +1,6 @@
-import * as State from './state';
+import * as State from '../state/state';
 
-import {goTo} from './actions';
+import {goTo} from '../state/actions';
 
 export const start = (getHappy, writeNew) => {
   getHappy.addEventListener('click', () => State.update(goTo('sentence-page')));

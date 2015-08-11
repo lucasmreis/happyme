@@ -1,24 +1,29 @@
-$serif-font: 'Sorts Mill Goudy', serif;
-$sans-serif-font: sans-serif;
+$sans-serif-font: 'Roboto', sans-serif;
 
 $happy-color: #492E74;
 $happy-color-light: lighten($happy-color, 30%);
 
+@mixin happy-font() {
+  font-family: $sans-serif-font;
+}
+
 @mixin happy-btn() {
   font-family: $sans-serif-font;
   font-size: 2em;
-  background-color: $happy-color-light;
-  color: $happy-color;
+  border: 3px solid $happy-color-light;
+  background-color: $happy-color;
+  color: $happy-color-light;
 }
 
 body {
-  font-family: $serif-font;
+  font-family: $sans-serif-font;
   overflow-x: hidden;
   background-color: $happy-color;
   color: $happy-color-light;
 }
 
 .container {
+  padding-top: 60px;
   position: relative;
   text-align: center;
 }
@@ -45,13 +50,59 @@ body {
   transition:         opacity .3s, margin-left .7s;
 }
 
+.loader {
+  color: $happy-color-light;
+}
+
+h1 {
+  @include happy-font();
+  font-size: 4em;
+  margin: 0px auto 60px auto;
+}
+
 .btn {
   @include happy-btn();
   width: 80%;
   line-height: 4em;
   display: block;
-  margin: 60px auto;
-  box-sizing:border-box;
-  -moz-box-sizing:border-box;
-  -webkit-box-sizing:border-box;
+  margin: 0px auto 60px auto;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.menu {
+  margin-bottom: 60px;
+}
+
+.menu-btn {
+  display: inline-block;
+  margin: 0px 60px;
+}
+
+.menu-btn-icon {
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+#sentence {
+  font-style: italic;
+  font-weight: 300;
+  font-size: 2em;
+}
+
+.visible {
+  opacity: 1;
+  -webkit-transition: opacity .3s;
+  -moz-transition:    opacity .3s;
+  -o-transition:      opacity .3s;
+  transition:         opacity .3s;
+}
+
+.invisible {
+  opacity: 0;
+  -webkit-transition: opacity .3s;
+  -moz-transition:    opacity .3s;
+  -o-transition:      opacity .3s;
+  transition:         opacity .3s;
 }
