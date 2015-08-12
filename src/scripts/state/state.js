@@ -2,12 +2,10 @@ import equals from 'deep-equal';
 
 let state = {
   page: 'loading-page',
-  sentences: [
-    {id: 123, text: "Lembra da Pretinha!"},
-    {id: 456, text: "Lembra do Cotinho!"}
-  ],
+  sentences: [ "Lembra da Pretinha!", "Lembra do Cotinho!" ],
   currentSentence: 0,
-  randomSentences: []
+  randomSentences: [],
+  newSentence: ''
 };
 
 let listeners = [];

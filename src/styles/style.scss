@@ -107,7 +107,7 @@ h1 {
   transition:         opacity .3s;
 }
 
-.input-sentence {
+#input-sentence {
   background-color: $happy-color-light;
   color: $happy-color;
 
@@ -129,8 +129,8 @@ h1 {
   transition:         background-color .8s, color .8s, font-style .8s;
 }
 
-.input-sentence:focus,
-.input-sentence.focus {
+#input-sentence:focus,
+#input-sentence.focus {
   outline-color: transparent;
   outline-style: none;
   font-style: normal;

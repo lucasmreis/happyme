@@ -8,15 +8,19 @@ import {currentRandomSentence} from '../state/query';
 import {prop} from '../util';
 
 export const start = (home, next, text) => {
-  const sentence = currentRandomSentence(State.current());
-  text.innerHTML = sentence.text;
+  State.listen(prop('page'), (n, p) => {
+    if (n === 'sentence-page') {
+      const state = State.current();
+      text.innerHTML = currentRandomSentence(state);
+    }
+  });
 
   State.listen(prop('currentSentence'), (n, p) => {
-    const s = State.current().sentences[n];
+    const s = State.current().randomSentences[n];
     classes.remove(text, 'visible');
     classes.add(text, 'invisible');
     setTimeout(() => {
-      text.innerHTML = s.text
+      text.innerHTML = s;
       classes.remove(text, 'invisible');
       classes.add(text, 'visible');
     }, 350);

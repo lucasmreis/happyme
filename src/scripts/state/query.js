@@ -8,4 +8,4 @@ export const nextIndex = (array, index) => {
 };
 
 export const currentRandomSentence = state =>
-  state.sentences[state.currentSentence];
+  state.randomSentences[state.currentSentence];

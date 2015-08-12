@@ -4,12 +4,11 @@ import {addItem, assoc} from '../util';
 export const goTo = page => state =>
   assoc('page', page, state);
 
-export const addSentence = idGenerator => text => state => {
-  const id           = idGenerator(text);
-  const sentence     = {id: id, text: text};
+export const addSentence = state => {
+  const sentence     = state.newSentence;
   const newSentences = addItem(sentence, state.sentences);
   const newState     = assoc('sentences', newSentences, state);
-  return newState;
+  return assoc('newSentence', undefined, newState);
 };
 
 export const removeSentence = id => state => {
@@ -21,3 +20,6 @@ export const removeSentence = id => state => {
 
 export const nextSentenceIndex = state =>
   assoc('currentSentence', nextIndex(state.sentences, state.currentSentence), state);
+
+export const changeNewSentence = s => state =>
+  assoc('newSentence', s, state);
