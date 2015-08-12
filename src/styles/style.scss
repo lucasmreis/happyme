@@ -106,3 +106,38 @@ h1 {
   -o-transition:      opacity .3s;
   transition:         opacity .3s;
 }
+
+.input-sentence {
+  background-color: $happy-color-light;
+  color: $happy-color;
+
+  padding: 0px 15px;
+  font-family: $sans-serif-font;
+  font-style: italic;
+  font-size: 2em;
+  line-height: 2em;
+  border: 3px solid $happy-color-light;
+  width: 80%;
+  display: block;
+  margin: 0px auto 60px auto;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-transition: background-color .8s, color .8s, font-style .8s;
+  -moz-transition:    background-color .8s, color .8s, font-style .8s;
+  -o-transition:      background-color .8s, color .8s, font-style .8s;
+  transition:         background-color .8s, color .8s, font-style .8s;
+}
+
+.input-sentence:focus,
+.input-sentence.focus {
+  outline-color: transparent;
+  outline-style: none;
+  font-style: normal;
+  background-color: $happy-color;
+  color: $happy-color-light;
+  -webkit-transition: background-color .8s, color .8s, font-style .8s;
+  -moz-transition:    background-color .8s, color .8s, font-style .8s;
+  -o-transition:      background-color .8s, color .8s, font-style .8s;
+  transition:         background-color .8s, color .8s, font-style .8s;
+}
