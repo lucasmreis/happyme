@@ -6,6 +6,9 @@ export const goTo = page => state =>
 
 export const addSentence = state => {
   const sentence     = state.newSentence;
+  if (!sentence || sentence === '') {
+    return state;
+  }
   const newSentences = addItem(sentence, state.sentences);
   const newState     = assoc('sentences', newSentences, state);
   return assoc('newSentence', undefined, newState);
