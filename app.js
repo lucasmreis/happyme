@@ -457,6 +457,9 @@ var goTo = function goTo(page) {
 exports.goTo = goTo;
 var addSentence = function addSentence(state) {
   var sentence = state.newSentence;
+  if (!sentence || sentence === '') {
+    return state;
+  }
   var newSentences = (0, _util.addItem)(sentence, state.sentences);
   var newState = (0, _util.assoc)('sentences', newSentences, state);
   return (0, _util.assoc)('newSentence', undefined, newState);
