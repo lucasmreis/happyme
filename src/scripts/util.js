@@ -6,6 +6,12 @@ export const addItem = (i, array) => {
   return c;
 };
 
+export const removeItem = (i, array) => {
+  let c = clone(array);
+  c.splice(i, 1);
+  return c;
+};
+
 export const assoc = (prop, v, obj) => {
   if (!obj) {
     return o => assoc(prop, v, o);

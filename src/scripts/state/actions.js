@@ -1,5 +1,5 @@
 import {nextIndex} from './query';
-import {addItem, assoc} from '../util';
+import {addItem, removeItem, assoc} from '../util';
 
 export const goTo = page => state =>
   assoc('page', page, state);
@@ -12,15 +12,16 @@ export const addSentence = state => {
   return assoc('newSentence', undefined, newState);
 };
 
-export const removeSentence = id => state => {
-  const idEquals     = item => item.id !== id;
-  const newSentences = state.sentences.filter(idEquals);
-  const newState     = assoc('sentences', newSentences, state);
-  return newState;
-};
-
 export const nextSentenceIndex = state =>
   assoc('currentSentence', nextIndex(state.sentences, state.currentSentence), state);
+
+export const removeCurrent = state => {
+  const c = state.currentSentence;
+  const s = state.randomSentences[c];
+  const i = state.sentences.indexOf(s);
+  const n = assoc('sentences', removeItem(i, state.sentences), state);
+  return nextSentenceIndex(n);
+};
 
 export const changeNewSentence = s => state =>
   assoc('newSentence', s, state);

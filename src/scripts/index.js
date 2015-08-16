@@ -20,17 +20,17 @@ const pages = {
 // generate random sentences
 const initialSentences = State.current().sentences;
 State.update(genRandomSentences(initialSentences));
-console.log('+++', State.current());
 
 // controllers
-let getHappy     = document.getElementById('get-happy');
-let newSentence  = document.getElementById('new-sentence');
+let getHappy    = document.getElementById('get-happy');
+let newSentence = document.getElementById('new-sentence');
 HomeController.start(getHappy, newSentence);
 
-let homeSentence = document.getElementById('back-home');
-let nextSentence = document.getElementById('next-sentence');
-let sentenceText = document.getElementById('sentence');
-SentencePageController.start(homeSentence, nextSentence, sentenceText);
+let homeSentence   = document.getElementById('back-home');
+let nextSentence   = document.getElementById('next-sentence');
+let removeSentence = document.getElementById('remove-sentence');
+let sentenceText   = document.getElementById('sentence');
+SentencePageController.start(homeSentence, nextSentence, removeSentence, sentenceText);
 
 let inputSentence = document.getElementById('input-sentence');
 let addSentence   = document.getElementById('add-sentence');

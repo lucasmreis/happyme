@@ -285,9 +285,25 @@ var _stateActions = require('../state/actions');
 
 var _stateQuery = require('../state/query');
 
+var _stateFillRandom = require('../state/fill-random');
+
 var _util = require('../util');
 
-var start = function start(home, next, text) {
+var updateText = function updateText(textElement) {
+  return function () {
+    var c = State.current();
+    var r = (0, _stateQuery.currentRandomSentence)(c);
+    _domClasses2['default'].remove(textElement, 'visible');
+    _domClasses2['default'].add(textElement, 'invisible');
+    setTimeout(function () {
+      textElement.innerHTML = r;
+      _domClasses2['default'].remove(textElement, 'invisible');
+      _domClasses2['default'].add(textElement, 'visible');
+    }, 350);
+  };
+};
+
+var start = function start(home, next, remove, text) {
   State.listen((0, _util.prop)('page'), function (n, p) {
     if (n === 'sentence-page') {
       var state = State.current();
@@ -295,16 +311,7 @@ var start = function start(home, next, text) {
     }
   });
 
-  State.listen((0, _util.prop)('currentSentence'), function (n, p) {
-    var s = State.current().randomSentences[n];
-    _domClasses2['default'].remove(text, 'visible');
-    _domClasses2['default'].add(text, 'invisible');
-    setTimeout(function () {
-      text.innerHTML = s;
-      _domClasses2['default'].remove(text, 'invisible');
-      _domClasses2['default'].add(text, 'visible');
-    }, 350);
-  });
+  State.listen((0, _util.prop)('currentSentence'), updateText(text));
 
   home.addEventListener('click', function () {
     return State.update((0, _stateActions.goTo)('home'));
@@ -312,10 +319,16 @@ var start = function start(home, next, text) {
   next.addEventListener('click', function () {
     return State.update(_stateActions.nextSentenceIndex);
   });
+  remove.addEventListener('click', function () {
+    var state = State.update(_stateActions.removeCurrent);
+    var sentences = state.sentences;
+    State.update((0, _stateFillRandom.genRandomSentences)(sentences));
+    updateText(text)();
+  });
 };
 exports.start = start;
 
-},{"../state/actions":10,"../state/query":12,"../state/state":13,"../util":15,"dom-classes":4}],8:[function(require,module,exports){
+},{"../state/actions":10,"../state/fill-random":11,"../state/query":12,"../state/state":13,"../util":15,"dom-classes":4}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -396,7 +409,6 @@ var pages = {
 // generate random sentences
 var initialSentences = State.current().sentences;
 State.update((0, _stateFillRandom.genRandomSentences)(initialSentences));
-console.log('+++', State.current());
 
 // controllers
 var getHappy = document.getElementById('get-happy');
@@ -405,8 +417,9 @@ HomeController.start(getHappy, newSentence);
 
 var homeSentence = document.getElementById('back-home');
 var nextSentence = document.getElementById('next-sentence');
+var removeSentence = document.getElementById('remove-sentence');
 var sentenceText = document.getElementById('sentence');
-SentencePageController.start(homeSentence, nextSentence, sentenceText);
+SentencePageController.start(homeSentence, nextSentence, removeSentence, sentenceText);
 
 var inputSentence = document.getElementById('input-sentence');
 var addSentence = document.getElementById('add-sentence');
@@ -465,23 +478,20 @@ var addSentence = function addSentence(state) {
 };
 
 exports.addSentence = addSentence;
-var removeSentence = function removeSentence(id) {
-  return function (state) {
-    var idEquals = function idEquals(item) {
-      return item.id !== id;
-    };
-    var newSentences = state.sentences.filter(idEquals);
-    var newState = (0, _util.assoc)('sentences', newSentences, state);
-    return newState;
-  };
-};
-
-exports.removeSentence = removeSentence;
 var nextSentenceIndex = function nextSentenceIndex(state) {
   return (0, _util.assoc)('currentSentence', (0, _query.nextIndex)(state.sentences, state.currentSentence), state);
 };
 
 exports.nextSentenceIndex = nextSentenceIndex;
+var removeCurrent = function removeCurrent(state) {
+  var c = state.currentSentence;
+  var s = state.randomSentences[c];
+  var i = state.sentences.indexOf(s);
+  var n = (0, _util.assoc)('sentences', (0, _util.removeItem)(i, state.sentences), state);
+  return nextSentenceIndex(n);
+};
+
+exports.removeCurrent = removeCurrent;
 var changeNewSentence = function changeNewSentence(s) {
   return function (state) {
     return (0, _util.assoc)('newSentence', s, state);
@@ -515,7 +525,6 @@ var fisherYates = function fisherYates(a) {
 exports.fisherYates = fisherYates;
 var genRandomSentences = function genRandomSentences(sentences) {
   return function (state) {
-    console.log('---', sentences.length, sentences.length > 0);
     var c = (0, _util.assoc)('currentSentence', 0);
     var r = sentences.length > 0 ? (0, _util.assoc)('randomSentences', fisherYates(sentences)) : (0, _util.assoc)('randomSentences', ['Write a new inspiration for yourself!']);
     return r(c(state));
@@ -644,6 +653,13 @@ var addItem = function addItem(i, array) {
 };
 
 exports.addItem = addItem;
+var removeItem = function removeItem(i, array) {
+  var c = clone(array);
+  c.splice(i, 1);
+  return c;
+};
+
+exports.removeItem = removeItem;
 var assoc = function assoc(prop, v, obj) {
   if (!obj) {
     return function (o) {
