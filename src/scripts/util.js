@@ -6,8 +6,9 @@ export const addItem = (i, array) => {
   return c;
 };
 
-export const removeItem = (i, array) => {
+export const removeItem = (el, array) => {
   let c = clone(array);
+  const i = array.indexOf(el);
   c.splice(i, 1);
   return c;
 };

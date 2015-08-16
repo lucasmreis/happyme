@@ -18,8 +18,7 @@ export const nextSentenceIndex = state =>
 export const removeCurrent = state => {
   const c = state.currentSentence;
   const s = state.randomSentences[c];
-  const i = state.sentences.indexOf(s);
-  const n = assoc('sentences', removeItem(i, state.sentences), state);
+  const n = assoc('sentences', removeItem(s, state.sentences), state);
   return nextSentenceIndex(n);
 };
 
