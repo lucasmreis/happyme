@@ -20,6 +20,7 @@ const pages = {
 // generate random sentences
 const initialSentences = State.current().sentences;
 State.update(genRandomSentences(initialSentences));
+console.log('+++', State.current());
 
 // controllers
 let getHappy     = document.getElementById('get-happy');

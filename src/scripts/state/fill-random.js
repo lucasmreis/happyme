@@ -15,7 +15,10 @@ export const fisherYates = a => {
 };
 
 export const genRandomSentences = sentences => state => {
+  console.log('---', sentences.length, sentences.length > 0);
   const c = assoc('currentSentence', 0);
-  const r = assoc('randomSentences', fisherYates(sentences));
+  const r = sentences.length > 0 ?
+    assoc('randomSentences', fisherYates(sentences)) :
+    assoc('randomSentences', ['Write a new inspiration for yourself!']);
   return r(c(state));
 };

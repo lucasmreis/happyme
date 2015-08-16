@@ -396,6 +396,7 @@ var pages = {
 // generate random sentences
 var initialSentences = State.current().sentences;
 State.update((0, _stateFillRandom.genRandomSentences)(initialSentences));
+console.log('+++', State.current());
 
 // controllers
 var getHappy = document.getElementById('get-happy');
@@ -457,9 +458,7 @@ var goTo = function goTo(page) {
 exports.goTo = goTo;
 var addSentence = function addSentence(state) {
   var sentence = state.newSentence;
-  if (!sentence || sentence === '') {
-    return state;
-  }
+  if (!sentence || sentence === '') return state;
   var newSentences = (0, _util.addItem)(sentence, state.sentences);
   var newState = (0, _util.assoc)('sentences', newSentences, state);
   return (0, _util.assoc)('newSentence', undefined, newState);
@@ -516,8 +515,9 @@ var fisherYates = function fisherYates(a) {
 exports.fisherYates = fisherYates;
 var genRandomSentences = function genRandomSentences(sentences) {
   return function (state) {
+    console.log('---', sentences.length, sentences.length > 0);
     var c = (0, _util.assoc)('currentSentence', 0);
-    var r = (0, _util.assoc)('randomSentences', fisherYates(sentences));
+    var r = sentences.length > 0 ? (0, _util.assoc)('randomSentences', fisherYates(sentences)) : (0, _util.assoc)('randomSentences', ['Write a new inspiration for yourself!']);
     return r(c(state));
   };
 };
