@@ -38,17 +38,17 @@ WritePageController.start(inputSentence, addSentence);
 
 // routing
 State.listen(prop('page'), (n, p) => {
-  window.history.pushState(null, null, n);
+  window.location.hash = '/' + n;
   classes.remove(pages[p], 'inside');
   classes.add(pages[n], 'inside');
 });
-window.onpopstate = function() {
-  const p = window.location.pathname.substring(1);
+window.addEventListener('hashchange', () => {
+  const p = window.location.hash.slice(2);
   const c = State.current().page;
   if (p && p !== '' && p !== c) {
     State.update(goTo(p));
   }
-};
+});
 
 // scripts are loaded, show home page
 setTimeout(function() {

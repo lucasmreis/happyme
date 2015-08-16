@@ -427,17 +427,17 @@ WritePageController.start(inputSentence, addSentence);
 
 // routing
 State.listen((0, _util.prop)('page'), function (n, p) {
-  window.history.pushState(null, null, n);
+  window.location.hash = '/' + n;
   _domClasses2['default'].remove(pages[p], 'inside');
   _domClasses2['default'].add(pages[n], 'inside');
 });
-window.onpopstate = function () {
-  var p = window.location.pathname.substring(1);
+window.addEventListener('hashchange', function () {
+  var p = window.location.hash.slice(2);
   var c = State.current().page;
   if (p && p !== '' && p !== c) {
     State.update((0, _stateActions.goTo)(p));
   }
-};
+});
 
 // scripts are loaded, show home page
 setTimeout(function () {
