@@ -315,7 +315,7 @@ var start = function start(home, next, text) {
 };
 exports.start = start;
 
-},{"../state/actions":10,"../state/query":12,"../state/state":13,"../util":14,"dom-classes":4}],8:[function(require,module,exports){
+},{"../state/actions":10,"../state/query":12,"../state/state":13,"../util":15,"dom-classes":4}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -353,7 +353,7 @@ var start = function start(input, add) {
 };
 exports.start = start;
 
-},{"../state/actions":10,"../state/fill-random":11,"../state/state":13,"../util":14}],9:[function(require,module,exports){
+},{"../state/actions":10,"../state/fill-random":11,"../state/state":13,"../util":15}],9:[function(require,module,exports){
 'use strict';
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
@@ -437,7 +437,7 @@ State.listen(function (x) {
   return console.log('STATE', JSON.stringify(x, null, '  '));
 });
 
-},{"./controllers/home-controller":6,"./controllers/sentence-page-controller":7,"./controllers/write-page-controller":8,"./state/actions":10,"./state/fill-random":11,"./state/state":13,"./util":14,"dom-classes":4}],10:[function(require,module,exports){
+},{"./controllers/home-controller":6,"./controllers/sentence-page-controller":7,"./controllers/write-page-controller":8,"./state/actions":10,"./state/fill-random":11,"./state/state":13,"./util":15,"dom-classes":4}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -490,7 +490,7 @@ var changeNewSentence = function changeNewSentence(s) {
 };
 exports.changeNewSentence = changeNewSentence;
 
-},{"../util":14,"./query":12}],11:[function(require,module,exports){
+},{"../util":15,"./query":12}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -523,7 +523,7 @@ var genRandomSentences = function genRandomSentences(sentences) {
 };
 exports.genRandomSentences = genRandomSentences;
 
-},{"../util":14}],12:[function(require,module,exports){
+},{"../util":15}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -553,13 +553,17 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+var _util = require('../util');
+
 var _deepEqual = require('deep-equal');
 
 var _deepEqual2 = _interopRequireDefault(_deepEqual);
 
+var _storage = require('./storage');
+
 var state = {
   page: 'loading-page',
-  sentences: ["Lembra da Pretinha!", "Lembra do Cotinho!"],
+  sentences: (0, _storage.load)(),
   currentSentence: 0,
   randomSentences: [],
   newSentence: ''
@@ -599,9 +603,30 @@ var update = function update(f) {
   }
   return state;
 };
-exports.update = update;
 
-},{"deep-equal":1}],14:[function(require,module,exports){
+exports.update = update;
+listen((0, _util.prop)('sentences'), _storage.save);
+
+},{"../util":15,"./storage":14,"deep-equal":1}],14:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var save = function save(sentences) {
+  var data = JSON.stringify(sentences);
+  window.localStorage.setItem('happy-me', data);
+};
+
+exports.save = save;
+var load = function load() {
+  var data = window.localStorage.getItem('happy-me');
+  var sentences = JSON.parse(data) || [];
+  return sentences;
+};
+exports.load = load;
+
+},{}],15:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

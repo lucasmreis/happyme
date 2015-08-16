@@ -1,8 +1,11 @@
+import {prop} from '../util';
 import equals from 'deep-equal';
+
+import {save, load} from './storage';
 
 let state = {
   page: 'loading-page',
-  sentences: [ "Lembra da Pretinha!", "Lembra do Cotinho!" ],
+  sentences: load(),
   currentSentence: 0,
   randomSentences: [],
   newSentence: ''
@@ -36,3 +39,5 @@ export const update = f => {
   }
   return state;
 };
+
+listen(prop('sentences'), save);
