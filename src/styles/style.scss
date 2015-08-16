@@ -77,7 +77,12 @@ h1 {
   margin-bottom: 60px;
 }
 
+.menu-bottom {
+  margin-top: 100px;
+}
+
 .menu-btn {
+  width: 60px;
   display: inline-block;
   margin: 0px 40px;
 }
@@ -92,6 +97,7 @@ h1 {
   font-weight: 300;
   font-size: 2em;
   line-height: 1.5em;
+  padding: 0px 10px;
 }
 
 .visible {
