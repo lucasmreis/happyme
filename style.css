@@ -56,7 +56,11 @@ h1 {
 .menu {
   margin-bottom: 60px; }
 
+.menu-bottom {
+  margin-top: 60px; }
+
 .menu-btn {
+  width: 60px;
   display: inline-block;
   margin: 0px 40px; }
 
@@ -68,7 +72,8 @@ h1 {
   font-style: italic;
   font-weight: 300;
   font-size: 2em;
-  line-height: 1.5em; }
+  line-height: 1.5em;
+  padding: 0px 10px; }
 
 .visible {
   opacity: 1;
