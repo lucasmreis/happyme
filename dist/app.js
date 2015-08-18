@@ -486,8 +486,7 @@ exports.nextSentenceIndex = nextSentenceIndex;
 var removeCurrent = function removeCurrent(state) {
   var c = state.currentSentence;
   var s = state.randomSentences[c];
-  var i = state.sentences.indexOf(s);
-  var n = (0, _util.assoc)('sentences', (0, _util.removeItem)(i, state.sentences), state);
+  var n = (0, _util.assoc)('sentences', (0, _util.removeItem)(s, state.sentences), state);
   return nextSentenceIndex(n);
 };
 
@@ -653,8 +652,9 @@ var addItem = function addItem(i, array) {
 };
 
 exports.addItem = addItem;
-var removeItem = function removeItem(i, array) {
+var removeItem = function removeItem(el, array) {
   var c = clone(array);
+  var i = array.indexOf(el);
   c.splice(i, 1);
   return c;
 };

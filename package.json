@@ -6,9 +6,11 @@
   "scripts": {
     "start": "cd dist && httpserver",
     "test": "mocha --recursive --compilers js:babel/register --reporter spec",
-    "build": "npm run js && npm run css && npm run html",
+    "build": "npm run js && npm run css && npm run html && npm run assets && npm run config",
     "js": "browserify src/scripts/index.js -t babelify --outfile dist/app.js",
     "html": "cp src/index.html dist/",
+    "assets": "cp -R src/assets/ dist/assets/",
+    "config": "cp src/manifest.json dist/",
     "css": "node-sass src/styles/reset.scss dist/reset.css && node-sass src/styles/style.scss dist/style.css",
     "lint": "eslint src/*.js",
     "c": "babel-node"
