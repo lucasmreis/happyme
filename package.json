@@ -8,10 +8,13 @@
     "test": "mocha --recursive --compilers js:babel/register --reporter spec",
     "build": "npm run js && npm run css && npm run html && npm run assets && npm run config",
     "js": "browserify src/scripts/index.js -t babelify --outfile dist/app.js",
+    "js:watch": "watchify src/scripts/index.js -t babelify --outfile dist/app.js -v",
     "html": "cp src/index.html dist/",
+    "html:watch": "onchange 'src/*.html' -v -- npm run html",
     "assets": "cp -R src/assets/ dist/assets/",
     "config": "cp src/manifest.json dist/",
-    "css": "node-sass src/styles/reset.scss dist/reset.css && node-sass src/styles/style.scss dist/style.css",
+    "css": "node-sass src/styles/ -o dist/",
+    "css:watch": "node-sass -w src/styles/ -o dist/",
     "lint": "eslint src/*.js",
     "c": "babel-node"
   },
@@ -33,7 +36,10 @@
     "chai": "^3.2.0",
     "eslint": "^1.0.0",
     "httpserver": "^0.2.0",
-    "mocha": "^2.2.5"
+    "mocha": "^2.2.5",
+    "node-sass": "^3.2.0",
+    "onchange": "^2.0.0",
+    "watchify": "^3.3.1"
   },
   "dependencies": {
     "bm-random": "^1.0.0",
