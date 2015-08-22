@@ -7,12 +7,15 @@
     "start": "cd dist && httpserver",
     "test": "mocha --recursive --compilers js:babel/register --reporter spec",
     "build": "npm run js && npm run css && npm run html && npm run assets && npm run config",
+    "build:watch": "parallelshell 'npm run js:watch' 'npm run css:watch' 'npm run html:watch' 'npm run assets:watch' 'npm run config:watch'",
     "js": "browserify src/scripts/index.js -t babelify --outfile dist/app.js",
     "js:watch": "watchify src/scripts/index.js -t babelify --outfile dist/app.js -v",
     "html": "cp src/index.html dist/",
     "html:watch": "onchange 'src/*.html' -v -- npm run html",
     "assets": "cp -R src/assets/ dist/assets/",
+    "assets:watch": "onchange 'src/assets/*.*' -v -- npm run assets",
     "config": "cp src/manifest.json dist/",
+    "config:watch": "onchange 'src/manifest.json' -v -- npm run config",
     "css": "node-sass src/styles/ -o dist/",
     "css:watch": "node-sass -w src/styles/ -o dist/",
     "lint": "eslint src/*.js",
@@ -39,6 +42,7 @@
     "mocha": "^2.2.5",
     "node-sass": "^3.2.0",
     "onchange": "^2.0.0",
+    "parallelshell": "^2.0.0",
     "watchify": "^3.3.1"
   },
   "dependencies": {
